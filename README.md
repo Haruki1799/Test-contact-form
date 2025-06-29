@@ -17,7 +17,8 @@ Laravel環境構築
 7.php artisan make:migration create_categories_table
 8.php artisan make:migration create_users_table
 9.php artisan make:migration create_contacts_table
-
+10.php artisan migrate
+11.php artisan key:generate
 
 
 ##使用技術（実行環境）

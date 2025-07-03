@@ -3,6 +3,7 @@
     margin: 0 auto;
     padding: 30px 15px;
     max-width: 1230px;
+    color: #c29797;
 }
 
 .contact-form__heading {
@@ -12,8 +13,9 @@
 
 .form {
     margin: 0 auto;
-    width: 70%;
+    width: 80%;
     text-align: center;
+    color: #c29797;
 }
 
 .form__group {
@@ -26,8 +28,7 @@
     margin-left: 5px;
     padding: 4px 6px;
     border-radius: 3px;
-    background: #fafafa;
-    color: #aaa;
+    color: #ff0000;
 }
 
 .form__error {
@@ -36,10 +37,32 @@
     text-align: left;
 }
 
+.form__input--name{
+    display: flex;
+    justify-content:center;
+    width: 600px;
+}
+
+.form__input--first_name,
+.form__input--last_name
+{
+    width:100%;
+    background: color #D3D3D3;
+    margin-right: 15pt;
+}
+
+.form__input--radio{
+    display: flex;
+    justify-content:left;
+    width: 600px;
+    gap:5rem;
+}
+
 .form__input--text input,
 .form__input--textarea textarea {
     padding: 10px;
     width: 600px;
+    background-color: #D3D3D3;
     border: 1px solid #ddd;
     border-radius: 3px;
 
@@ -48,6 +71,22 @@
 
 .form__input--text input {
     height: 40px;
+}
+
+.form__input--text--tel{
+    display: flex;
+    justify-content: center;
+    width: 600px;
+}
+
+.form__input--text--category{
+    margin-left: 0;
+    justify-content: flex-start;
+    width: 300px;
+    height: 40px;
+    background-color: #D3D3D3;
+    border: 1px solid #ddd;
+    border-radius: 3px;
 }
 
 .form__input--textarea textarea {
@@ -60,11 +99,11 @@
 
 .form__button-submit {
     padding: 10px;
-    width: 30%;
+    width: 20%;
     height: 50px;
     border: none;
     border-radius: 3px;
-    background: #000;
+    background-color: peru;
     color: #fff;
     cursor: pointer;
 }

@@ -27,6 +27,7 @@ Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
 
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+Route::get('/admin/search', [AdminController::class, 'search'])->name('admin.search');
 Route::get('/admin/{id}', [AdminController::class, 'show'])->name('admin.show');
 Route::post('/admin/export', [AdminController::class, 'export'])->name('admin.export');
 

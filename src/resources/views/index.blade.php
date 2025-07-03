@@ -47,7 +47,7 @@
                     <!-- <input type="radio" name="gender" value="1" checked />男性 -->
                     <!-- <input type="radio" name="gender" value="2" />女性 -->
                     <!-- <input type="radio" name="gender" value="3" />その他 -->
-                    <label>
+                    <!-- <label>
                         <input type="radio" name="gender" value="1"
                             {{ old('gender', session('draft_contact.gender') ?? $contact['gender'] ?? '') == 1 ? 'checked' : '' }}>
                         男性
@@ -62,6 +62,27 @@
                     <label>
                         <input type="radio" name="gender" value="3"
                             {{ old('gender', session('draft_contact.gender') ?? $contact['gender'] ?? '') == 3 ? 'checked' : '' }}>
+                        その他
+                    </label> -->
+                    @php
+                    $selectedGender = old('gender', session('draft_contact.gender') ?? $contact['gender'] ?? 1);
+                    @endphp
+
+                    <label>
+                        <input type="radio" name="gender" value="1"
+                            {{ $selectedGender == 1 ? 'checked' : '' }}>
+                        男性
+                    </label>
+
+                    <label>
+                        <input type="radio" name="gender" value="2"
+                            {{ $selectedGender == 2 ? 'checked' : '' }}>
+                        女性
+                    </label>
+
+                    <label>
+                        <input type="radio" name="gender" value="3"
+                            {{ $selectedGender == 3 ? 'checked' : '' }}>
                         その他
                     </label>
 
@@ -156,10 +177,10 @@
                             {{ $category->content }}
                         </option>
 
-                            @endforeach
+                        @endforeach
                     </select>
                 </div>
-            <div class="form__error">
+                <div class="form__error">
                     @error('address')
                     {{ $message }}
                     @enderror

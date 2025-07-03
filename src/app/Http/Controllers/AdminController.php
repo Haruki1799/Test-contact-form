@@ -4,17 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Contact;
+use App\Models\Category;
 
 class AdminController extends Controller
 {
     public function index(Request $request)
     {
+        
+        $contacts = contact::paginate();
+        $contacts = Contact::with('category')->paginate(7);
+
+
         $query = Contact::query();
 
         if ($request->filled('keyword')) {
             $query->where(function ($q) use ($request) {
-                $q->where('name', 'like', '%' . $request->keyword . '%')
-                    ->orWhere('email', 'like', '%' . $request->keyword . '%');
+                $keyword = $request->keyword;
+                $q->whereRaw("CONCAT(first_name, last_name) LIKE ?", ["%{$keyword}%"])
+                    ->orWhere('email', 'like', "%{$keyword}%");
             });
         }
 
@@ -23,17 +30,28 @@ class AdminController extends Controller
         }
 
         if ($request->filled('inquiry_type')) {
-            $query->where('inquiry_type', $request->inquiry_type);
+            $query->where('category_id', $request->inquiry_type);
         }
+
 
         if ($request->filled('date')) {
             $query->whereDate('created_at', $request->date);
         }
 
-        $contacts = $query->paginate(10);
+        $contacts = $query->paginate(7);
+        $categories = Category::all();
 
-        return view('admin', compact('contacts'));
+        return view('admin', compact('contacts','categories'));
     }
+
+    public function search(Request $request)
+    {
+        $contacts = Contact::with('category')->CategorySearch($request->category_id)->KeywordSearch($request->keyword)->get();
+        $categories = Category::all();
+
+        return view('admin', compact('contacts', 'categories'));
+    }
+
 
     public function show($id)
     {

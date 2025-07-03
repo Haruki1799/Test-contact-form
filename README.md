@@ -19,7 +19,8 @@ Laravel環境構築
 9.php artisan make:migration create_contacts_table
 10.php artisan migrate
 11.php artisan key:generate
-
+12.php artisan make:seeder CategoriesTableSeeder
+13.php artisan db:seed
 
 ##使用技術（実行環境）
 ・php 7.4.9

@@ -30,7 +30,7 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 3px;
 }
 
 .filters__name{
@@ -88,10 +88,12 @@
     border-bottom: 1px solid #ccc;
     padding: 10px;
     text-align: left;
+    color: #c29797;
 }
 
 .admin__table th {
-    background-color: #f0efed;
+    background-color: #5f5143;
+    color: white;
 }
 
 .admin__details {
@@ -147,4 +149,62 @@
 .admin__pagination .page-link:hover {
     background-color: #eee;
     background-color: #f9f9f9;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+}
+
+.modal__content {
+    background-color: white;
+    margin: 10pt auto;
+    padding: 30px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 800px;
+    position: relative;
+    color: #c29797;
+}
+
+.modal__close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.modal-item{
+    padding: 10px 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.modal-item-label{
+    width: 40%;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.modal-item-label--value{
+    width: 60%;
+    font-size: 16px;
+}
+.modal-btn {
+    margin: 32px auto 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 150px;
+    display: block;
+    background:red;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
 }

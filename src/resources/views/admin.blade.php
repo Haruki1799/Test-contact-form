@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 @section('nav-links')
-<a href="/login">
-    logout
-</a>
+<a href="/login">logout</a>
 @endsection
 
 @section('css')
@@ -57,6 +55,7 @@
             {{ $contacts->links() }}
         </div>
     </div>
+
     <table class="admin__table">
         <thead>
             <tr>
@@ -69,10 +68,9 @@
         </thead>
         <tbody>
             @foreach ($contacts as $contact)
-            <tr>
+            <tr id="row-{{ $contact->id }}">
                 <td>{{ $contact->first_name . $contact->last_name }}</td>
-                <td> {{ $contact->gender == 1 ? '男性' : ($contact->gender == 2 ? '女性' : 'その他') }}
-                </td>
+                <td>{{ $contact->gender == 1 ? '男性' : ($contact->gender == 2 ? '女性' : 'その他') }}</td>
                 <td>{{ $contact->email }}</td>
                 <td>{{ $contact->category->content }}</td>
                 <td>
@@ -82,50 +80,48 @@
             @endforeach
         </tbody>
     </table>
+
     @foreach ($contacts as $contact)
     <div id="modal-{{ $contact->id }}" class="modal">
         <div class="modal__content">
-            <form action="/admin" class="delete" method="POST">
-                <span class="modal__close" data-target="modal-{{ $contact->id }}">×</span>
-                <div class="modal-item">
-                    <p class="modal-item-label">お名前</p>
-                    <p class="modal-item-label--value">{{ $contact->first_name .' '. $contact->last_name }}</p>
-                </div>
-                <div class="modal-item">
-                    <p class="modal-item-label">性別</p>
-                    <p class="modal-item-label--value">{{ $contact->gender == 1 ? '男性' : ($contact->gender == 2 ? '女性' : 'その他') }}</p>
-                </div>
-                <div class="modal-item">
-                    <p class="modal-item-label">メールアドレス</p>
-                    <p class="modal-item-label--value">{{ $contact->email }}</p>
-                </div>
-                <div class="modal-item">
-                    <p class="modal-item-label">電話番号</p>
-                    <p class="modal-item-label--value">{{ $contact->tel }}</p>
-                </div>
-                <div class="modal-item">
-                    <p class="modal-item-label">住所</p>
-                    <p class="modal-item-label--value">{{ $contact->address }}</p>
-                </div>
-                <div class="modal-item">
-                    <p class="modal-item-label">建物名</p>
-                    <p class="modal-item-label--value">{{ $contact->building }}</p>
-                </div>
-                <div class="modal-item">
-                    <p class="modal-item-label">お問い合わせの種類</p>
-                    <p class="modal-item-label--value">{{ $contact->category->content }}</p>
-                </div>
-                <div class="modal-item">
-                    <p class="modal-item-label">お問い合わせ内容</p>
-                    <p class="modal-item-label--value">{{ $contact->detail }}</p>
-                </div>
-                <input type="submit" class="modal-btn" value="削除" />
-            </form>
+            <span class="modal__close" data-target="modal-{{ $contact->id }}">×</span>
+            <div class="modal-item">
+                <p class="modal-item-label">お名前</p>
+                <p class="modal-item-label--value">{{ $contact->first_name .' '. $contact->last_name }}</p>
+            </div>
+            <div class="modal-item">
+                <p class="modal-item-label">性別</p>
+                <p class="modal-item-label--value">{{ $contact->gender == 1 ? '男性' : ($contact->gender == 2 ? '女性' : 'その他') }}</p>
+            </div>
+            <div class="modal-item">
+                <p class="modal-item-label">メールアドレス</p>
+                <p class="modal-item-label--value">{{ $contact->email }}</p>
+            </div>
+            <div class="modal-item">
+                <p class="modal-item-label">電話番号</p>
+                <p class="modal-item-label--value">{{ $contact->tel }}</p>
+            </div>
+            <div class="modal-item">
+                <p class="modal-item-label">住所</p>
+                <p class="modal-item-label--value">{{ $contact->address }}</p>
+            </div>
+            <div class="modal-item">
+                <p class="modal-item-label">建物名</p>
+                <p class="modal-item-label--value">{{ $contact->building }}</p>
+            </div>
+            <div class="modal-item">
+                <p class="modal-item-label">お問い合わせの種類</p>
+                <p class="modal-item-label--value">{{ $contact->category->content }}</p>
+            </div>
+            <div class="modal-item">
+                <p class="modal-item-label">お問い合わせ内容</p>
+                <p class="modal-item-label--value">{{ $contact->detail }}</p>
+            </div>
+            <button type="button" class="modal-btn delete-btn" data-id="{{ $contact->id }}">削除</button>
         </div>
     </div>
     @endforeach
 </div>
-
 @endsection
 
 @section('script')
@@ -150,6 +146,27 @@
             if (e.target.classList.contains('modal')) {
                 e.target.style.display = 'none';
             }
+        });
+
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const contactId = this.dataset.id;
+
+                fetch(`/admin/contacts/${contactId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Accept': 'application/json'
+                        }
+                    })
+                    .then(response => {
+                        if (!response.ok) return;
+                        const modal = document.getElementById(`modal-${contactId}`);
+                        if (modal) modal.style.display = 'none';
+                        const row = document.getElementById(`row-${contactId}`);
+                        if (row) row.remove();
+                    });
+            });
         });
     });
 </script>

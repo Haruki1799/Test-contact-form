@@ -25,7 +25,7 @@ Route::post('/contacts/thanks', [ContactController::class, 'store']);
 Route::get('/', [CategoryController::class, 'index']);
 Route::get('/register', [UserController::class, 'index']);
 Route::post('/register', [RegisterController::class, 'Registration'])->name('register.store');
-// Route::post('/register', [UserController::class, 'store'])->name('register.store');
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 // Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
 // Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::get('/login', [UserController::class, 'showLoginForm'])->name('login'); // フォーム表示

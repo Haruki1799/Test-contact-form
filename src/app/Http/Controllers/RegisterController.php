@@ -16,4 +16,16 @@ class RegisterController extends Controller
 
         return view('/');
     }
+    public function store(RegisterRequest $request)
+    {
+        $data = $request->validated();
+
+        User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ]);
+
+        return redirect('/');
+    }
 }

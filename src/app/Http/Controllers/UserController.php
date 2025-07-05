@@ -20,9 +20,13 @@ class UserController extends Controller
 
     public function login(UserRequest $request)
     {
-        $User = $request->only(['name','email','password']);
-        // User::create($User);
+        $User = $request->only(['email','password']);
 
-        return view('/');
+        if (auth()->attempt($User)) {
+            return redirect('/');
+        }
+        return back()->withErrors([
+            'email' => 'メールアドレスまたはパスワードが正しくありません',
+        ])->withInput();
     }
 }

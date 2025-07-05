@@ -37,6 +37,9 @@ Route::get('/admin/search', [AdminController::class, 'search'])->name('admin.sea
 Route::get('/admin/{id}', [AdminController::class, 'show'])->name('admin.show');
 Route::post('/admin/export', [AdminController::class, 'export'])->name('admin.export');
 
+Route::delete('/admin/contacts/{id}', [AdminController::class, 'destroy'])->name('admin.contacts.destroy');
+
+
 Route::post('/logout', function () {
     Auth::logout();
     return redirect('/login');

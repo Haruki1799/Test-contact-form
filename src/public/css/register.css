@@ -1,6 +1,6 @@
 body {
     font-family: 'Helvetica Neue', sans-serif;
-    background-color: white;
+    background-color: #f5f5f0;
     margin: 0;
     padding: 0;
     color: #5f5143;
@@ -69,4 +69,15 @@ body {
 
 .register-button:hover {
     background-color: #3e362d;
+}
+
+.Registration__error {
+    color: #e63946;
+    font-size: 0.9rem;
+    margin-top: 3px;
+    margin-bottom: 16px;
+}
+
+.is-invalid {
+    background-color: #fff5f5;
 }

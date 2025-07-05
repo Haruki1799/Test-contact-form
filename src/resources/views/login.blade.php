@@ -18,16 +18,22 @@
     </div>
     <div class="login">
         <div class="login__form-wrapper">
-            <form method="POST" action="{{ route('login') }}" class="login__form">
-                @csrf
-                <label for="email" class="login__label">メールアドレス</label>
-                <input type="email" id="email" name="email" class="login__input" placeholder="例: test@example.com" required>
+                <form method="POST" action="{{ route('login.attempt') }}" class="login__form" novalidate>
+                    @csrf
+                    <label for="email" class="login__label">メールアドレス</label>
+                    <input type="text" name="email" class="login__input @error('email') is-invalid @enderror" placeholder="例: test@example.com">
+                    @error('email')
+                    <div class="login__error">{{ $message }}</div>
+                    @enderror
 
-                <label for="password" class="login__label">パスワード</label>
-                <input type="password" id="password" name="password" class="login__input" placeholder="例: coachtechno6" required>
+                    <label for="password" class="login__label">パスワード</label>
+                    <input type="password" id="password" name="password" class="login__input @error('password') is-invalid @enderror" placeholder="例: coachtechno6">
+                    @error('password')
+                    <div class="login__error">{{ $message }}</div>
+                    @enderror
 
-                <button type="submit" class="login__button">ログイン</button>
-            </form>
+                    <button type="submit" class="login__button">ログイン</button>
+                </form>
         </div>
     </div>
-@endsection
+    @endsection

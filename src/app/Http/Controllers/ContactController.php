@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Models\Category;
 use Illuminate\Http\Request;
-
+use App\Http\Requests\ContactRequest;
 
 class ContactController extends Controller
 {
@@ -24,7 +24,7 @@ class ContactController extends Controller
     }
 
 
-    public function confirm(Request $request)
+    public function confirm(ContactRequest $request)
     {
         $tel = $request->input('tel1') . $request->input('tel2') . $request->input('tel3');
         $contact = $request->only(['category_id','first_name', 'last_name', 'gender', 'email', 'address', 'building', 'detail' ,'tel1', 'tel2', 'tel3']);
@@ -43,7 +43,3 @@ class ContactController extends Controller
         return view('thanks');
     }
 }
-
-
-
-

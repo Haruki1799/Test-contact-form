@@ -13,20 +13,5 @@ class CategoryController extends Controller
 
         return view('index', compact('categories'));
     }
-    // public function confirm(Request $request)
-    // {
-    //     $category = Category::create([
-    //         'content' => $request->input('content'),
-    //     ]);
 
-    //     return view('confirm', ['category' => $category]);
-    // }
-    // public function confirm(Request $request)
-    // {
-    //     $category = Category::create([
-    //         'content' => $request->input('content'),
-    //     ]);
-
-    //     return view('confirm', ['category' => $category]);
-    // }
 }

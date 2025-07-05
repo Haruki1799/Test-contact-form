@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,7 +24,12 @@ Route::post('/contacts/confirm', [ContactController::class, 'confirm'])->name('c
 Route::post('/contacts/thanks', [ContactController::class, 'store']);
 Route::get('/', [CategoryController::class, 'index']);
 Route::get('/register', [UserController::class, 'index']);
-Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
+Route::post('/register', [RegisterController::class, 'Registration'])->name('register.store');
+// Route::post('/register', [UserController::class, 'store'])->name('register.store');
+// Route::get('/login', [UserController::class, 'showLoginForm'])->name('login');
+// Route::post('/login', [UserController::class, 'login'])->name('login');
+Route::get('/login', [UserController::class, 'showLoginForm'])->name('login'); // フォーム表示
+Route::post('/login', [UserController::class, 'login'])->name('login.attempt'); // ログイン処理
 
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');

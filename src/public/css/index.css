@@ -1,3 +1,14 @@
+.header-nav {
+    position: fixed;
+    top: 2%;
+    right: 10%;
+    width: 70pt;
+    background-color: #a4a4a4;
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    border-radius: 2px;
+}
 
 .contact-form__content {
     margin: 0 auto;

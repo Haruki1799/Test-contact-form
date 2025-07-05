@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 @section('nav-links')
-<a href="/admin">
-    admin
-</a>
+<a href="/admin" class="header-nav">admin</a>
 @endsection
 
 @section('css')

@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 @section('nav-links')
-<a href="/login">
-    login
-</a>
+<a href="/login" class="header-nav">login</a>
 @endsection
 
 @section('css')

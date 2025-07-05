@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 @section('nav-links')
-<a href="/register">
-    register
-</a>
+<a href="/register" class="header-nav" >register</a>
 @endsection
 
 
